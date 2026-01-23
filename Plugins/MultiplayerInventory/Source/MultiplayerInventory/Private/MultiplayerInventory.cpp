@@ -4,6 +4,8 @@
 
 #define LOCTEXT_NAMESPACE "FMultiplayerInventoryModule"
 
+DEFINE_LOG_CATEGORY(LogInventory);
+
 void FMultiplayerInventoryModule::StartupModule()
 {
 	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
