@@ -6,6 +6,10 @@
 
 #include "Cpp_PC_Inventory.generated.h"
 
+class UInputAction;
+// Forward declarations
+class UInputMappingContext;
+
 /**
  * 
  */
@@ -18,4 +22,16 @@ protected:
 	// FUNCTIONS
 	//=================================================================================================================
 	virtual void BeginPlay() override;
+	virtual void SetupInputComponent() override;
+	
+	 void PrimaryInteract();
+		
+	//=================================================================================================================
+	// PROPERTIES & VARIABLES
+	//=================================================================================================================
+	UPROPERTY(EditDefaultsOnly, Category = "Inventory|Input") 
+	TObjectPtr<UInputMappingContext> DefaultMappingContext;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Inventory|Input") 
+	TObjectPtr<UInputAction> PrimaryInteractAction;
 };
