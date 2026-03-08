@@ -6,10 +6,10 @@
 
 #include "Cpp_PC_Inventory.generated.h"
 
-class UCpp_WGT_HUD;
 // Forward declarations
 class UInputMappingContext;
 class UInputAction;
+class UCpp_WGT_HUD;
 
 /**
  * 
