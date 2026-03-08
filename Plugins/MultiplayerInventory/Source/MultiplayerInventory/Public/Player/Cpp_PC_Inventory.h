@@ -6,6 +6,7 @@
 
 #include "Cpp_PC_Inventory.generated.h"
 
+class UCpp_WGT_HUD;
 // Forward declarations
 class UInputMappingContext;
 class UInputAction;
@@ -25,6 +26,7 @@ protected:
 	virtual void SetupInputComponent() override;
 	
 	 void PrimaryInteract();
+	void CreateHudWidget();
 		
 	//=================================================================================================================
 	// PROPERTIES & VARIABLES
@@ -34,4 +36,11 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Inventory|Input") 
 	TObjectPtr<UInputAction> PrimaryInteractAction;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Inventory|UI")
+	TSubclassOf<UCpp_WGT_HUD> HUDWidgetClass;
+
+	UPROPERTY(BlueprintReadOnly)
+	 TObjectPtr<UCpp_WGT_HUD> HUDWidget;
 };
+

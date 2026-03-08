@@ -5,6 +5,8 @@
 
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Blueprint/UserWidget.h"
+#include "Widgets/HUD/Cpp_WGT_HUD.h"
 
 void ACpp_PC_Inventory::BeginPlay() {
 	Super::BeginPlay();
@@ -15,6 +17,8 @@ void ACpp_PC_Inventory::BeginPlay() {
 			Subsystem->AddMappingContext(DefaultMappingContext, 0);
 		}
 	}
+	
+	CreateHudWidget();
 }
 
 void ACpp_PC_Inventory::SetupInputComponent() {
@@ -27,4 +31,16 @@ void ACpp_PC_Inventory::SetupInputComponent() {
 
 void ACpp_PC_Inventory::PrimaryInteract() {
 	UE_LOG(LogTemp, Warning, TEXT("Primary Interact"));
+}
+
+void ACpp_PC_Inventory::CreateHudWidget() {
+	if (!IsLocalController()) { // no need for dedicated server
+		return;
+	}
+	
+	checkf(HUDWidgetClass, TEXT("HUDWidgetClass is nullptr! Please assign HUDWidgetClass for PC"));
+	HUDWidget = CreateWidget<UCpp_WGT_HUD>(this, HUDWidgetClass);
+	if (IsValid(HUDWidget)) {
+		HUDWidget->AddToViewport();
+	}
 }
