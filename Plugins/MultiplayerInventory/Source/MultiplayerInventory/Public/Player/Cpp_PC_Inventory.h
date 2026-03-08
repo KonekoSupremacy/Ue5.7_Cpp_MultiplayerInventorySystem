@@ -6,9 +6,9 @@
 
 #include "Cpp_PC_Inventory.generated.h"
 
-class UInputAction;
 // Forward declarations
 class UInputMappingContext;
+class UInputAction;
 
 /**
  * 
@@ -30,7 +30,7 @@ protected:
 	// PROPERTIES & VARIABLES
 	//=================================================================================================================
 	UPROPERTY(EditDefaultsOnly, Category = "Inventory|Input") 
-	TObjectPtr<UInputMappingContext> DefaultMappingContext;
+	TArray<TObjectPtr<UInputMappingContext>> DefaultMappingContexts;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Inventory|Input") 
 	TObjectPtr<UInputAction> PrimaryInteractAction;

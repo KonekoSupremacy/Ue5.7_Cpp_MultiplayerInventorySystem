@@ -11,7 +11,9 @@ void ACpp_PC_Inventory::BeginPlay() {
 	
 	auto* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
 	if (IsValid(Subsystem)) {
-		Subsystem->AddMappingContext(DefaultMappingContext, 0);
+		for (auto DefaultMappingContext : DefaultMappingContexts) {
+			Subsystem->AddMappingContext(DefaultMappingContext, 0);
+		}
 	}
 }
 
