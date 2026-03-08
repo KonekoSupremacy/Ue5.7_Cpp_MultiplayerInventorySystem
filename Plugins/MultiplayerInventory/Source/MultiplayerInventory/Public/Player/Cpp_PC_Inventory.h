@@ -23,10 +23,14 @@ protected:
 	// FUNCTIONS
 	//=================================================================================================================
 	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaSeconds) override;
 	virtual void SetupInputComponent() override;
 	
-	 void PrimaryInteract();
 	void CreateHudWidget();
+	
+	void TraceForItem();
+	void PrimaryInteract();
+	
 		
 	//=================================================================================================================
 	// PROPERTIES & VARIABLES
@@ -39,8 +43,17 @@ protected:
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Inventory|UI")
 	TSubclassOf<UCpp_WGT_HUD> HUDWidgetClass;
-
 	UPROPERTY(BlueprintReadOnly)
-	 TObjectPtr<UCpp_WGT_HUD> HUDWidget;
+	TObjectPtr<UCpp_WGT_HUD> HUDWidget;
+	
+	UPROPERTY(EditDefaultsOnly, Category="Inventory")
+	float InteractionTraceLength = 1000.f;
+	UPROPERTY(EditDefaultsOnly, Category="Inventory")
+	TEnumAsByte<ECollisionChannel> ItemTraceChannel;
+	
+	UPROPERTY()
+	TWeakObjectPtr<AActor> CurrentHitActor;
+	UPROPERTY()
+	TWeakObjectPtr<AActor> PreviousHitActor;
 };
 
