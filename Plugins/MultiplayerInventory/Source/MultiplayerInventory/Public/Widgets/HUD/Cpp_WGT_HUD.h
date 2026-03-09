@@ -12,4 +12,14 @@
 UCLASS()
 class MULTIPLAYERINVENTORY_API UCpp_WGT_HUD : public UUserWidget {
 	GENERATED_BODY()
+	
+public:
+	//=================================================================================================================
+	// FUNCTIONS
+	//=================================================================================================================
+	UFUNCTION(BlueprintImplementableEvent, Category = "Inventory")
+	void ShowPickupMessage(const FString& Message);
+	
+	UFUNCTION(BlueprintImplementableEvent, Category = "Inventory")
+	void HidePickupMessage();
 };
