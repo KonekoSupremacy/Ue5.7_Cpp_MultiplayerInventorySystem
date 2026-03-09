@@ -6,6 +6,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Blueprint/UserWidget.h"
+#include "Interaction/Cpp_HighlightInterface.h"
 #include "Items/Components/Cpp_AC_Item.h"
 #include "Kismet/GameplayStatics.h"
 #include "Widgets/HUD/Cpp_WGT_HUD.h"
@@ -66,20 +67,22 @@ void ACpp_PC_Inventory::TraceForItem() {
 	GetWorld()->LineTraceSingleByChannel(HitResult, TraceStart, TraceEnd, ItemTraceChannel);
 	
 	PreviousHitActor = CurrentHitActor;
+	AActor* PreviousHitActorRaw = PreviousHitActor.Get();
 	CurrentHitActor = HitResult.GetActor();
-	const auto* CurrentHitActorRaw = HitResult.GetActor(); // non weak, faster lookup than weak
+	AActor* CurrentHitActorRaw = HitResult.GetActor(); // non weak, faster lookup than weak
 	if (!CurrentHitActorRaw) {
 		if (IsValid(HUDWidget)) {
 			HUDWidget->HidePickupMessage();
 		}
 	}
-	
-	if (CurrentHitActor.HasSameIndexAndSerialNumber(PreviousHitActor)) {
+	// same as previous, ignore
+	if (CurrentHitActorRaw == PreviousHitActorRaw) {
 		return;
 	}
 	
 	if (CurrentHitActor.IsValid()) {
-		UE_LOG(LogTemp, Warning, TEXT("Trace New Actor"))
+		ToggleItemHighlight(CurrentHitActorRaw, true);
+		
 		const auto* ItemComponent = CurrentHitActorRaw->FindComponentByClass<UCpp_AC_Item>();
 		if (!IsValid(ItemComponent)) {
 			return;
@@ -88,8 +91,15 @@ void ACpp_PC_Inventory::TraceForItem() {
 			HUDWidget->ShowPickupMessage(ItemComponent->GetPickupMessage());
 		}
 	}
-	if (PreviousHitActor.IsValid()) {
-		UE_LOG(LogTemp, Warning, TEXT("Stopped Tracing Actor"))
+	if (IsValid(PreviousHitActorRaw)) {
+		ToggleItemHighlight(PreviousHitActorRaw, true);
+	}
+}
+
+void ACpp_PC_Inventory::ToggleItemHighlight(AActor* InActor, const bool bHighlight) {
+	if (const auto* Highlightable = InActor->FindComponentByInterface(
+	UCpp_HighlightInterface::StaticClass()); IsValid(Highlightable)) {
+		ICpp_HighlightInterface::Execute_Highlight(InActor, bHighlight);
 	}
 }
 

@@ -29,6 +29,7 @@ protected:
 	void CreateHudWidget();
 	
 	void TraceForItem();
+	static void ToggleItemHighlight(AActor* InActor, const bool bHighlight);
 	void PrimaryInteract();
 	
 		
