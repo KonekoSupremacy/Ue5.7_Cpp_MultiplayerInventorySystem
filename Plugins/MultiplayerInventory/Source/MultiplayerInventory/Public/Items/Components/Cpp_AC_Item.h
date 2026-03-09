@@ -7,7 +7,7 @@
 #include "Cpp_AC_Item.generated.h"
 
 
-UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
+UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable)
 class MULTIPLAYERINVENTORY_API UCpp_AC_Item : public UActorComponent {
 	GENERATED_BODY()
 
@@ -24,5 +24,5 @@ protected:
 	// PROPERTIES & VARIABLES
 	//=================================================================================================================
 	UPROPERTY(EditAnywhere, Category = "Inventory")
-	FString PickupMessage;
+	FString PickupMessage = "F -> Pickup Item";
 };
