@@ -6,6 +6,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Blueprint/UserWidget.h"
+#include "Items/Components/Cpp_AC_Item.h"
 #include "Kismet/GameplayStatics.h"
 #include "Widgets/HUD/Cpp_WGT_HUD.h"
 
@@ -66,12 +67,26 @@ void ACpp_PC_Inventory::TraceForItem() {
 	
 	PreviousHitActor = CurrentHitActor;
 	CurrentHitActor = HitResult.GetActor();
+	const auto* CurrentHitActorRaw = HitResult.GetActor(); // non weak, faster lookup than weak
+	if (!CurrentHitActorRaw) {
+		if (IsValid(HUDWidget)) {
+			HUDWidget->HidePickupMessage();
+		}
+	}
+	
 	if (CurrentHitActor.HasSameIndexAndSerialNumber(PreviousHitActor)) {
 		return;
 	}
 	
 	if (CurrentHitActor.IsValid()) {
 		UE_LOG(LogTemp, Warning, TEXT("Trace New Actor"))
+		const auto* ItemComponent = CurrentHitActorRaw->FindComponentByClass<UCpp_AC_Item>();
+		if (!IsValid(ItemComponent)) {
+			return;
+		}
+		if (IsValid(HUDWidget)) {
+			HUDWidget->ShowPickupMessage(ItemComponent->GetPickupMessage());
+		}
 	}
 	if (PreviousHitActor.IsValid()) {
 		UE_LOG(LogTemp, Warning, TEXT("Stopped Tracing Actor"))
