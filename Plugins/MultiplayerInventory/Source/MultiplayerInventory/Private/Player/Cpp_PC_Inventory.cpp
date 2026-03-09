@@ -67,9 +67,9 @@ void ACpp_PC_Inventory::TraceForItem() {
 	GetWorld()->LineTraceSingleByChannel(HitResult, TraceStart, TraceEnd, ItemTraceChannel);
 	
 	PreviousHitActor = CurrentHitActor;
-	AActor* PreviousHitActorRaw = PreviousHitActor.Get();
+	const AActor* PreviousHitActorRaw = PreviousHitActor.Get();
 	CurrentHitActor = HitResult.GetActor();
-	AActor* CurrentHitActorRaw = HitResult.GetActor(); // non weak, faster lookup than weak
+	const AActor* CurrentHitActorRaw = HitResult.GetActor(); // non weak, faster lookup than weak
 	if (!CurrentHitActorRaw) {
 		if (IsValid(HUDWidget)) {
 			HUDWidget->HidePickupMessage();
@@ -80,6 +80,7 @@ void ACpp_PC_Inventory::TraceForItem() {
 		return;
 	}
 	
+	// Highlight New
 	if (CurrentHitActor.IsValid()) {
 		ToggleItemHighlight(CurrentHitActorRaw, true);
 		
@@ -91,15 +92,17 @@ void ACpp_PC_Inventory::TraceForItem() {
 			HUDWidget->ShowPickupMessage(ItemComponent->GetPickupMessage());
 		}
 	}
+	
+	// Unhighlight Old
 	if (IsValid(PreviousHitActorRaw)) {
-		ToggleItemHighlight(PreviousHitActorRaw, true);
+		ToggleItemHighlight(PreviousHitActorRaw, false);
 	}
 }
 
-void ACpp_PC_Inventory::ToggleItemHighlight(AActor* InActor, const bool bHighlight) {
-	if (const auto* Highlightable = InActor->FindComponentByInterface(
+void ACpp_PC_Inventory::ToggleItemHighlight(const AActor* InActor, const bool bHighlight) {
+	if (auto* Highlightable = InActor->FindComponentByInterface(
 	UCpp_HighlightInterface::StaticClass()); IsValid(Highlightable)) {
-		ICpp_HighlightInterface::Execute_Highlight(InActor, bHighlight);
+		ICpp_HighlightInterface::Execute_Highlight(Highlightable, bHighlight);
 	}
 }
 
