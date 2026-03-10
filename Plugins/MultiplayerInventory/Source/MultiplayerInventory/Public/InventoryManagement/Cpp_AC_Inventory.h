@@ -9,7 +9,7 @@
 
 class UCpp_WGT_InventoryBase;
 
-UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
+UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable)
 class MULTIPLAYERINVENTORY_API UCpp_AC_Inventory : public UActorComponent {
 	GENERATED_BODY()
 
@@ -30,9 +30,12 @@ protected:
 	//=================================================================================================================
 	// PROPERTIES & VARIABLES
 	//=================================================================================================================
+	UPROPERTY()
+	TWeakObjectPtr<APlayerController> OwningController;
+	
 	UPROPERTY(EditAnywhere, Category = "Inventory")
-	TSubclassOf<UCpp_WGT_InventoryBase> InventoryMenuClass;
+	TSubclassOf<UCpp_WGT_InventoryBase> InventoryWidgetClass;
 	UPROPERTY(BlueprintReadOnly)
-	TObjectPtr<UCpp_WGT_InventoryBase> InventoryMenu;
+	TObjectPtr<UCpp_WGT_InventoryBase> InventoryWidget;
 	
 };
