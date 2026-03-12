@@ -18,6 +18,8 @@ public:
 	// FUNCTIONS
 	//=================================================================================================================
 	UCpp_AC_Inventory();
+	
+	void ToggleInventory();
 
 protected:
 	//=================================================================================================================
@@ -37,5 +39,6 @@ protected:
 	TSubclassOf<UCpp_WGT_InventoryBase> InventoryWidgetClass;
 	UPROPERTY(BlueprintReadOnly)
 	TObjectPtr<UCpp_WGT_InventoryBase> InventoryWidget;
-	
+
+	bool bInventoryOpen = false;
 };

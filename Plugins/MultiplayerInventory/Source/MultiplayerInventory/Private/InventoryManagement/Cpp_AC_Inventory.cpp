@@ -12,6 +12,25 @@ UCpp_AC_Inventory::UCpp_AC_Inventory() {
 
 }
 
+void UCpp_AC_Inventory::ToggleInventory() {
+	if (!IsValid(InventoryWidget)) {
+		return;
+	}
+	bInventoryOpen = !bInventoryOpen;
+	InventoryWidget->SetVisibility((bInventoryOpen) ? ESlateVisibility::Visible : ESlateVisibility::Collapsed);
+	if (auto* ControllerRaw = OwningController.Get()) {
+		if (bInventoryOpen) {
+			const FInputModeGameAndUI InputMode;
+			ControllerRaw->SetInputMode(InputMode);
+		}
+		else {
+			const FInputModeGameOnly InputMode;
+			ControllerRaw->SetInputMode(InputMode);
+		}
+		ControllerRaw->SetShowMouseCursor(bInventoryOpen);
+	}
+}
+
 
 void UCpp_AC_Inventory::BeginPlay() {
 	Super::BeginPlay();
@@ -31,7 +50,8 @@ void UCpp_AC_Inventory::ConstructInventory() {
 	
 	InventoryWidget = CreateWidget<UCpp_WGT_InventoryBase>(OwningControllerRaw, InventoryWidgetClass);
 	InventoryWidget->AddToViewport();
-	
+	bInventoryOpen = true;
+	ToggleInventory(); // close it
 }
 
 
