@@ -7,12 +7,22 @@
 #include "EnhancedInputSubsystems.h"
 #include "Blueprint/UserWidget.h"
 #include "Interaction/Cpp_HighlightInterface.h"
+#include "InventoryManagement/Cpp_AC_Inventory.h"
 #include "Items/Components/Cpp_AC_Item.h"
 #include "Kismet/GameplayStatics.h"
 #include "Widgets/HUD/Cpp_WGT_HUD.h"
 
+void ACpp_PC_Inventory::ToggleInventory() {
+	if (!IsValid(InventoryComponent)) {
+		return;
+	}
+	InventoryComponent->ToggleInventory();
+}
+
 void ACpp_PC_Inventory::BeginPlay() {
 	Super::BeginPlay();
+	
+	InventoryComponent = FindComponentByClass<UCpp_AC_Inventory>();
 	
 	auto* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
 	if (IsValid(Subsystem)) {
@@ -23,19 +33,17 @@ void ACpp_PC_Inventory::BeginPlay() {
 	
 	CreateHudWidget();
 }
-
 void ACpp_PC_Inventory::Tick(float DeltaSeconds) {
 	Super::Tick(DeltaSeconds);
 	
 	TraceForItem();
 }
-
 void ACpp_PC_Inventory::SetupInputComponent() {
 	Super::SetupInputComponent();
 	
 	UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent);
-	EnhancedInputComponent->BindAction(PrimaryInteractAction, ETriggerEvent::Started, this, 
-		&ACpp_PC_Inventory::PrimaryInteract);
+	EnhancedInputComponent->BindAction(PrimaryInteractAction, ETriggerEvent::Started, this, &ACpp_PC_Inventory::PrimaryInteract);
+	EnhancedInputComponent->BindAction(ToggleInventoryAction, ETriggerEvent::Started, this, &ACpp_PC_Inventory::ToggleInventory);
 }
 
 void ACpp_PC_Inventory::CreateHudWidget() {
@@ -98,14 +106,12 @@ void ACpp_PC_Inventory::TraceForItem() {
 		ToggleItemHighlight(PreviousHitActorRaw, false);
 	}
 }
-
 void ACpp_PC_Inventory::ToggleItemHighlight(const AActor* InActor, const bool bHighlight) {
 	if (auto* Highlightable = InActor->FindComponentByInterface(
 	UCpp_HighlightInterface::StaticClass()); IsValid(Highlightable)) {
 		ICpp_HighlightInterface::Execute_Highlight(Highlightable, bHighlight);
 	}
 }
-
 void ACpp_PC_Inventory::PrimaryInteract() {
 	UE_LOG(LogTemp, Warning, TEXT("Primary Interact"));
 }

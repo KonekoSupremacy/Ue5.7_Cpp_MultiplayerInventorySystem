@@ -6,6 +6,7 @@
 
 #include "Cpp_PC_Inventory.generated.h"
 
+class UCpp_AC_Inventory;
 // Forward declarations
 class UInputMappingContext;
 class UInputAction;
@@ -17,6 +18,13 @@ class UCpp_WGT_HUD;
 UCLASS()
 class MULTIPLAYERINVENTORY_API ACpp_PC_Inventory : public APlayerController {
 	GENERATED_BODY()
+	
+public:
+	//=================================================================================================================
+	// FUNCTIONS
+	//=================================================================================================================
+	UFUNCTION(BlueprintCallable)
+	void ToggleInventory();
 	
 protected:
 	//=================================================================================================================
@@ -36,11 +44,16 @@ protected:
 	//=================================================================================================================
 	// PROPERTIES & VARIABLES
 	//=================================================================================================================
+	UPROPERTY()
+	TObjectPtr<UCpp_AC_Inventory> InventoryComponent;
+	
 	UPROPERTY(EditDefaultsOnly, Category = "Inventory|Input") 
 	TArray<TObjectPtr<UInputMappingContext>> DefaultMappingContexts;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Inventory|Input") 
 	TObjectPtr<UInputAction> PrimaryInteractAction;
+	UPROPERTY(EditDefaultsOnly, Category = "Inventory|Input") 
+	TObjectPtr<UInputAction> ToggleInventoryAction;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Inventory|UI")
 	TSubclassOf<UCpp_WGT_HUD> HUDWidgetClass;
