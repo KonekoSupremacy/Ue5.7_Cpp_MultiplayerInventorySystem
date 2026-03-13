@@ -23,6 +23,6 @@ protected:
 	//=================================================================================================================
 	// PROPERTIES & VARIABLES
 	//=================================================================================================================
-	UPROPERTY(EditAnywhere, Category="Inventory")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Inventory")
 	EItemCategory ItemCategory; 	
 };
