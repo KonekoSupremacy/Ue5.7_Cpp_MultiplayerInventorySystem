@@ -7,6 +7,7 @@
 #include "Cpp_WGT_SpatialInventory.generated.h"
 
 // Forward declarations
+class UButton;
 class UWidgetSwitcher;
 class UCpp_WGT_InventoryGrid;
 
@@ -19,6 +20,20 @@ class MULTIPLAYERINVENTORY_API UCpp_WGT_SpatialInventory : public UCpp_WGT_Inven
 	
 protected:
 	//=================================================================================================================
+	// FUNCTIONS
+	//=================================================================================================================
+	virtual void NativeOnInitialized() override;
+	
+	UFUNCTION()
+	void ShowEquippables();
+	UFUNCTION()
+	void ShowConsumables();
+	UFUNCTION()
+	void ShowCraftables();
+	void SetActiveGrid(UCpp_WGT_InventoryGrid* Grid, UButton* ClickedButton);
+	void DisableButton(UButton* Button);
+	
+	//=================================================================================================================
 	// PROPERTIES & VARIABLES
 	//=================================================================================================================
 	UPROPERTY(meta = (BindWidget))
@@ -30,4 +45,11 @@ protected:
 	
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UWidgetSwitcher> WS_Grid;
+	
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<UButton> BTN_Equippables;
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<UButton> BTN_Consumables;
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<UButton> BTN_Craftables;
 };
