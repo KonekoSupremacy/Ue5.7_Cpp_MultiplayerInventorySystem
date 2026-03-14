@@ -22,34 +22,23 @@ protected:
 	//=================================================================================================================
 	// FUNCTIONS
 	//=================================================================================================================
-	virtual void NativeOnInitialized() override;
-	
-	UFUNCTION()
-	void ShowEquippables();
-	UFUNCTION()
-	void ShowConsumables();
-	UFUNCTION()
-	void ShowCraftables();
-	void SetActiveGrid(UCpp_WGT_InventoryGrid* Grid, UButton* ClickedButton);
-	void DisableButton(UButton* Button);
+	UFUNCTION(BlueprintCallable)
+	void SetActiveGrid(UCpp_WGT_InventoryGrid* Grid, const UButton* ClickedButton);
+	void DisableButton(const UButton* Button);
 	
 	//=================================================================================================================
 	// PROPERTIES & VARIABLES
 	//=================================================================================================================
-	UPROPERTY(meta = (BindWidget))
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UCpp_WGT_InventoryGrid> WBP_GridEquippables;
-	UPROPERTY(meta = (BindWidget))
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UCpp_WGT_InventoryGrid> WBP_GridConsumables;
-	UPROPERTY(meta = (BindWidget))
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UCpp_WGT_InventoryGrid> WBP_GridCraftables;
 	
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UWidgetSwitcher> WS_Grid;
 	
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UButton> BTN_Equippables;
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UButton> BTN_Consumables;
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UButton> BTN_Craftables;
+	UPROPERTY(BlueprintReadWrite, Category="Inventory")
+	TArray<TObjectPtr<UButton>> AllSwitcherButtons;
 };
