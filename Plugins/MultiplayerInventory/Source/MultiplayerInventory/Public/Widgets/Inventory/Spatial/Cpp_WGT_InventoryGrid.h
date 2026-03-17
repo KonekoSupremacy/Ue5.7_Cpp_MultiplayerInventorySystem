@@ -7,6 +7,10 @@
 #include "Types/Cpp_GridTypes.h"
 #include "Cpp_WGT_InventoryGrid.generated.h"
 
+class UUniformGridPanel;
+// Forward Declarations
+class UCpp_WGT_GridSlot;
+
 /**
  * 
  */
@@ -14,15 +18,39 @@ UCLASS()
 class MULTIPLAYERINVENTORY_API UCpp_WGT_InventoryGrid : public UUserWidget {
 	GENERATED_BODY()
 	
-protected:
+public:
 	//=================================================================================================================
 	// FUNCTIONS
 	//=================================================================================================================
 	FORCEINLINE EItemCategory GetItemCategory() const { return ItemCategory; }
 	
+protected:
+	//=================================================================================================================
+	// FUNCTIONS
+	//=================================================================================================================
+	virtual void NativeOnInitialized() override;
+	
+	void ConstructGrid();
+	
+	
 	//=================================================================================================================
 	// PROPERTIES & VARIABLES
 	//=================================================================================================================
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Inventory")
-	EItemCategory ItemCategory; 	
+	EItemCategory ItemCategory;
+	
+	UPROPERTY(EditAnywhere, Category="Inventory")
+	TSubclassOf<UCpp_WGT_GridSlot> GridSlotClass;
+	UPROPERTY() 
+	TArray<TObjectPtr<UCpp_WGT_GridSlot>> GridSlots;
+	
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<UUniformGridPanel> GridPanel;
+	UPROPERTY(EditAnywhere, Category="Inventory")
+	int16 GridRowCount = 5;
+	UPROPERTY(EditAnywhere, Category="Inventory")
+	int16 GridColumnCount = 10;
+	UPROPERTY(EditAnywhere, Category="Inventory")
+	float GridSlotSize = 50.f;
+	
 };
