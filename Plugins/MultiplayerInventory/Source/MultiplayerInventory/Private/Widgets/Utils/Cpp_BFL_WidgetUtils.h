@@ -3,24 +3,20 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Blueprint/UserWidget.h"
-#include "Cpp_WGT_GridSlot.generated.h"
-
-// Forward declarations
-class UImage;
+#include "Kismet/BlueprintFunctionLibrary.h"
+#include "Cpp_BFL_WidgetUtils.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class MULTIPLAYERINVENTORY_API UCpp_WGT_GridSlot : public UUserWidget {
+class MULTIPLAYERINVENTORY_API
+	UCpp_BFL_WidgetUtils : public UBlueprintFunctionLibrary {
 	GENERATED_BODY()
 	
-protected:
+public:
 	//=================================================================================================================
-	// PROPERTIES & VARIABLES
+	// FUNCTIONS
 	//=================================================================================================================
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UImage> IMG_GridSlot;
-	
+	static int32 GetIndexFromPosition(const FIntPoint& Position, const int16 Columns);
 };
