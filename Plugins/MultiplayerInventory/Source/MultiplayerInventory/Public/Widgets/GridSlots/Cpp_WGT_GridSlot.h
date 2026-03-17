@@ -27,7 +27,7 @@ protected:
 	//=================================================================================================================
 	// PROPERTIES & VARIABLES
 	//=================================================================================================================
-	UPROPERTY(meta = (BindWidget))
+	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
 	TObjectPtr<UImage> IMG_GridSlot;
 	
 	int16 Index;
