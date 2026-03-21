@@ -16,6 +16,9 @@ struct FInventoryEntry : public FFastArraySerializerItem {
 	FInventoryEntry() {}
 	
 private:
+	//=================================================================================================================
+	// PROPERTIES & VARIABLES
+	//=================================================================================================================
 	friend UCpp_InventoryItem;
 	friend struct FInventoryFastArray;
 	
@@ -28,6 +31,9 @@ USTRUCT()
 struct FInventoryFastArray : public FFastArraySerializer {
 	GENERATED_BODY()
 	
+	//=================================================================================================================
+	// FUNCTIONS
+	//=================================================================================================================
 	FInventoryFastArray() {
 		OwnerComponent = nullptr;
 	}
@@ -35,7 +41,7 @@ struct FInventoryFastArray : public FFastArraySerializer {
 		OwnerComponent = InOwnerComponent;
 	}
 	
-	TArray<UCpp_InventoryItem> GetAllItems() const;
+	TArray<UCpp_InventoryItem*> GetAllItems() const;
 	
 	// FFastArray funcs
 	void PreReplicatedRemove(const TArrayView<int32> RemovedIndices, int32 FinalSize);
@@ -47,6 +53,14 @@ struct FInventoryFastArray : public FFastArraySerializer {
 	void RemoveEntry(UCpp_InventoryItem* Item);
 	
 private:
+	//=================================================================================================================
+	// FUNCTIONS
+	//=================================================================================================================
+	void BroadcastEntry_Internal(const TArrayView<int32> Indices, const bool bRemoved);
+	
+	//=================================================================================================================
+	// PROPERTIES & VARIABLES
+	//=================================================================================================================
 	friend UCpp_AC_Inventory; 
 	
 	UPROPERTY(NotReplicated)
