@@ -27,10 +27,24 @@ UCpp_InventoryItem* FInventoryFastArray::AddEntry(UCpp_AC_Inventory* ItemCompone
 }
 
 UCpp_InventoryItem* FInventoryFastArray::AddEntry(UCpp_InventoryItem* Item) {
-	return nullptr;
+	check(OwnerComponent);
+	AActor* OwningActor = OwnerComponent->GetOwner();
+	check(OwningActor->HasAuthority());
+	
+	FInventoryEntry& NewEntry = Entries.AddDefaulted_GetRef();
+	NewEntry.Item = Item;
+	MarkItemDirty(NewEntry);
+	return Item;
 }
 
 void FInventoryFastArray::RemoveEntry(UCpp_InventoryItem* Item) {
+	for  (int16 i = 0; i< Entries.Num(); i++) {
+		if (Entries[i].Item == Item) {
+			Entries.RemoveAt(i);
+			MarkArrayDirty();
+			return;
+		}
+	}
 }
 
 void FInventoryFastArray::BroadcastEntry_Internal(const TArrayView<int32> Indices, const bool bRemoved) {
