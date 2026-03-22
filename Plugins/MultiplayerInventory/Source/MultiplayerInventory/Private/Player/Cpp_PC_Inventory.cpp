@@ -8,6 +8,7 @@
 #include "Blueprint/UserWidget.h"
 #include "Interaction/Cpp_HighlightInterface.h"
 #include "InventoryManagement/Cpp_AC_Inventory.h"
+#include "Items/Cpp_InventoryItem.h"
 #include "Items/Components/Cpp_AC_Item.h"
 #include "Kismet/GameplayStatics.h"
 #include "Widgets/HUD/Cpp_WGT_HUD.h"
@@ -114,4 +115,11 @@ void ACpp_PC_Inventory::ToggleItemHighlight(const AActor* InActor, const bool bH
 }
 void ACpp_PC_Inventory::PrimaryInteract() {
 	UE_LOG(LogTemp, Warning, TEXT("Primary Interact"));
+	auto* HitActor = CurrentHitActor.Get();
+	if (!HitActor) {
+		return;
+	}
+	auto* ItemComp = HitActor->FindComponentByClass<UCpp_AC_Inventory>();
+	check(InventoryComponent);
+	InventoryComponent->TryAddingItemToInventory(ItemComp);
 }

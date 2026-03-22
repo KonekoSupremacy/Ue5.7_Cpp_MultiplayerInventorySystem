@@ -26,7 +26,7 @@ public:
 	void ToggleInventory();
 	
 	UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly, Category = "Inventory")
-	void TryAddingItemToInventory(UCpp_InventoryItem* Item);
+	void TryAddingItemToInventory(UCpp_AC_Inventory* ItemComp);
 	
 	//=================================================================================================================
 	// PROPERTIES & VARIABLES

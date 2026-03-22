@@ -31,7 +31,7 @@ void UCpp_AC_Inventory::ToggleInventory() {
 	}
 }
 
-void UCpp_AC_Inventory::TryAddingItemToInventory(UCpp_InventoryItem* Item) {
+void UCpp_AC_Inventory::TryAddingItemToInventory(UCpp_AC_Inventory* ItemComp) {
 	OnInventoryFull.Broadcast();
 }
 
