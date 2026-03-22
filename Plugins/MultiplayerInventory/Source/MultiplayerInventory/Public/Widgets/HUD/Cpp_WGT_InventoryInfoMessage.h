@@ -18,11 +18,13 @@ public:
 	//=================================================================================================================
 	// FUNCTIONS
 	//=================================================================================================================
+	virtual void NativeOnInitialized() override;
+	
 	UFUNCTION(BlueprintNativeEvent, Category="Inventory")
 	void ShowMessage(const FString& Message);
 	UFUNCTION(BlueprintImplementableEvent, Category="Inventory")
 	void HideMessage();
-	
+
 private:
 	//=================================================================================================================
 	// PROPERTIES & VARIABLES

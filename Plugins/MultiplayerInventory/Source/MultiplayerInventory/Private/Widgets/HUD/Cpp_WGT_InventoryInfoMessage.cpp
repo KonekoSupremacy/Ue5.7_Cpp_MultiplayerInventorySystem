@@ -5,6 +5,14 @@
 
 #include "Components/TextBlock.h"
 
+void UCpp_WGT_InventoryInfoMessage::NativeOnInitialized() {
+	Super::NativeOnInitialized();
+	
+	TXT_Message->SetText(FText());
+	HideMessage();
+}
+
+
 void UCpp_WGT_InventoryInfoMessage::ShowMessage_Implementation(const FString& Message) {
 	check(TXT_Message);
 	TXT_Message->SetText(FText::FromString(Message));

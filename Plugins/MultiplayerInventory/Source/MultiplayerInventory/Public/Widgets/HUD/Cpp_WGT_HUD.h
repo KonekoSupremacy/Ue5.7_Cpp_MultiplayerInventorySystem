@@ -6,6 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include "Cpp_WGT_HUD.generated.h"
 
+class UCpp_WGT_InventoryInfoMessage;
 /**
  * 
  */
@@ -17,9 +18,24 @@ public:
 	//=================================================================================================================
 	// FUNCTIONS
 	//=================================================================================================================
+	virtual void NativeOnInitialized() override;
+	
 	UFUNCTION(BlueprintImplementableEvent, Category = "Inventory")
 	void ShowPickupMessage(const FString& Message);
 	
 	UFUNCTION(BlueprintImplementableEvent, Category = "Inventory")
 	void HidePickupMessage();
+	
+private:
+	//=================================================================================================================
+	// FUNCTIONS
+	//=================================================================================================================
+	void NoSpaceLeftInInventory();
+	
+	//=================================================================================================================
+	// PROPERTIES & VARIABLES
+	//=================================================================================================================
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<UCpp_WGT_InventoryInfoMessage> WBP_InfoMessage;
+	
 };
