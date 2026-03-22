@@ -11,6 +11,7 @@ class UCpp_InventoryItem;
 class UCpp_WGT_InventoryBase;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FInventoryItemUpdate, UCpp_InventoryItem*, Item, bool, bRemoved);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FInventoryFullDelegate);
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable)
 class MULTIPLAYERINVENTORY_API UCpp_AC_Inventory : public UActorComponent {
@@ -19,15 +20,19 @@ class MULTIPLAYERINVENTORY_API UCpp_AC_Inventory : public UActorComponent {
 public:
 	//=================================================================================================================
 	// FUNCTIONS
-	//====================================== ===========================================================================
+	//=================================================================================================================
 	UCpp_AC_Inventory();
 	
 	void ToggleInventory();
+	
+	UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly, Category = "Inventory")
+	void TryAddingItemToInventory(UCpp_InventoryItem* Item);
 	
 	//=================================================================================================================
 	// PROPERTIES & VARIABLES
 	//=================================================================================================================
 	FInventoryItemUpdate OnItemUpdated;
+	FInventoryFullDelegate OnInventoryFull;
 
 protected:
 	//=================================================================================================================
