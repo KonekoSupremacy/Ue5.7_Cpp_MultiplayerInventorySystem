@@ -4,6 +4,7 @@
 #include "InventoryManagement/Cpp_AC_Inventory.h"
 
 #include "Blueprint/UserWidget.h"
+#include "Items/Components/Cpp_AC_Item.h"
 #include "Widgets/Inventory/Base/Cpp_WGT_InventoryBase.h"
 
 
@@ -31,8 +32,12 @@ void UCpp_AC_Inventory::ToggleInventory() {
 	}
 }
 
-void UCpp_AC_Inventory::TryAddingItemToInventory(UCpp_AC_Inventory* ItemComp) {
-	OnInventoryFull.Broadcast();
+void UCpp_AC_Inventory::TryAddingItemToInventory(UCpp_AC_Item* ItemComp) {
+	FSlotAvailabilityResult Result = InventoryWidget->DoesHaveRoomForItem(ItemComp);
+	if (Result.TotalAmountToFill == 0) {
+		OnInventoryFull.Broadcast();
+		return;
+	}
 }
 
 

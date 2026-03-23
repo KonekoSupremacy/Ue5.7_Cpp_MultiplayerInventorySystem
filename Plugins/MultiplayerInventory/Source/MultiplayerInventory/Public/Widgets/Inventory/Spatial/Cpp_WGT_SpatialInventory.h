@@ -18,6 +18,12 @@ UCLASS()
 class MULTIPLAYERINVENTORY_API UCpp_WGT_SpatialInventory : public UCpp_WGT_InventoryBase {
 	GENERATED_BODY()
 	
+public:
+	//=================================================================================================================
+	// FUNCTIONS
+	//=================================================================================================================
+	virtual FSlotAvailabilityResult DoesHaveRoomForItem(UCpp_AC_Item* ItemComp) const override;
+	
 protected:
 	//=================================================================================================================
 	// FUNCTIONS
@@ -25,6 +31,7 @@ protected:
 	UFUNCTION(BlueprintCallable)
 	void SetActiveGrid(UCpp_WGT_InventoryGrid* Grid, const UButton* ClickedButton);
 	void DisableButton(const UButton* Button);
+	
 	
 	//=================================================================================================================
 	// PROPERTIES & VARIABLES

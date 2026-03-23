@@ -6,8 +6,9 @@
 #include "Components/ActorComponent.h"
 #include "Cpp_AC_Inventory.generated.h"
 
-class UCpp_InventoryItem;
 // Forward Declarations
+class UCpp_AC_Item;
+class UCpp_InventoryItem;
 class UCpp_WGT_InventoryBase;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FInventoryItemUpdate, UCpp_InventoryItem*, Item, bool, bRemoved);
@@ -26,7 +27,7 @@ public:
 	void ToggleInventory();
 	
 	UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly, Category = "Inventory")
-	void TryAddingItemToInventory(UCpp_AC_Inventory* ItemComp);
+	void TryAddingItemToInventory(UCpp_AC_Item* ItemComp);
 	
 	//=================================================================================================================
 	// PROPERTIES & VARIABLES

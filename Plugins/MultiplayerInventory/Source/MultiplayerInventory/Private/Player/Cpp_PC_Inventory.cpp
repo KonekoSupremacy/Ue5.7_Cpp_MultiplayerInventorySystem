@@ -119,7 +119,7 @@ void ACpp_PC_Inventory::PrimaryInteract() {
 	if (!HitActor) {
 		return;
 	}
-	auto* ItemComp = HitActor->FindComponentByClass<UCpp_AC_Inventory>();
+	auto* ItemComp = HitActor->FindComponentByClass<UCpp_AC_Item>();
 	check(InventoryComponent);
 	InventoryComponent->TryAddingItemToInventory(ItemComp);
 }
