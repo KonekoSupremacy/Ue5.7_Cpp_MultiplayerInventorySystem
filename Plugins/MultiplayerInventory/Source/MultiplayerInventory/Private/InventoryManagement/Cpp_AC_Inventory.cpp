@@ -38,6 +38,24 @@ void UCpp_AC_Inventory::TryAddingItemToInventory(UCpp_AC_Item* ItemComp) {
 		OnInventoryFull.Broadcast();
 		return;
 	}
+	auto* Item = Result.Item.Get();
+	if (Item && Result.bStackable) {
+		// update stack count of existing item
+		Server_AddStacksToItem(ItemComp, Result.TotalAmountToFill, Result.Remaining);
+	}
+	else if (Result.TotalAmountToFill > 0) {
+		// create item slot
+		const int16 StackCount = Result.bStackable ? Result.TotalAmountToFill : 0;
+		Server_AddNewItemToInventory(ItemComp, StackCount);
+	}
+}
+
+
+void UCpp_AC_Inventory::Server_AddNewItemToInventory_Implementation(UCpp_AC_Item* ItemComp, int16 StackCount) {
+	
+}
+void UCpp_AC_Inventory::Server_AddStacksToItem_Implementation(UCpp_AC_Item* ItemComp, int16 StackCount, int16 Remaining) {
+	
 }
 
 

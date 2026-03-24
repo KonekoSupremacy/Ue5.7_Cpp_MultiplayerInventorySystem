@@ -29,6 +29,11 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly, Category = "Inventory")
 	void TryAddingItemToInventory(UCpp_AC_Item* ItemComp);
 	
+	UFUNCTION(Server, Reliable)
+	void Server_AddNewItemToInventory(UCpp_AC_Item* ItemComp, int16 StackCount);
+	UFUNCTION(Server, Reliable)
+	void Server_AddStacksToItem(UCpp_AC_Item* ItemComp, int16 StackCount, int16 Remaining);
+	
 	//=================================================================================================================
 	// PROPERTIES & VARIABLES
 	//=================================================================================================================
