@@ -2,3 +2,10 @@
 
 
 #include "Items/Cpp_InventoryItem.h"
+#include "Net/UnrealNetwork.h"
+
+void UCpp_InventoryItem::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const {
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	
+	DOREPLIFETIME(ThisClass, ItemManifest);
+}

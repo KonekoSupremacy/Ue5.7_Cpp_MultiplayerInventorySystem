@@ -1,11 +1,11 @@
 ﻿#pragma once
 
 #include "CoreMinimal.h"
+#include "InventoryManagement/Cpp_AC_Inventory.h"
 #include "Net/Serialization/FastArraySerializer.h"
 
 #include "Cpp_InventoryFastArray.generated.h"
 
-class UCpp_AC_Inventory;
 class UCpp_InventoryItem;
 
 // single entry in inventory
@@ -30,6 +30,7 @@ private:
 USTRUCT()
 struct FInventoryFastArray : public FFastArraySerializer {
 	GENERATED_BODY()
+	friend UCpp_AC_Item;
 	
 	//=================================================================================================================
 	// FUNCTIONS
@@ -48,7 +49,7 @@ struct FInventoryFastArray : public FFastArraySerializer {
 	void PostReplicatedAdd(const TArrayView<int32> AddedIndices, int32 FinalSize);
 	bool NetDeltaSerialize(FNetDeltaSerializeInfo& DeltaParms);
 	
-	UCpp_InventoryItem* AddEntry(UCpp_AC_Inventory* ItemComponent);
+	UCpp_InventoryItem* AddEntry(UCpp_AC_Item* ItemComponent);
 	UCpp_InventoryItem* AddEntry(UCpp_InventoryItem* Item);
 	void RemoveEntry(UCpp_InventoryItem* Item);
 	
@@ -61,8 +62,6 @@ private:
 	//=================================================================================================================
 	// PROPERTIES & VARIABLES
 	//=================================================================================================================
-	friend UCpp_AC_Inventory; 
-	
 	UPROPERTY(NotReplicated)
 	TObjectPtr<UActorComponent> OwnerComponent;
 	

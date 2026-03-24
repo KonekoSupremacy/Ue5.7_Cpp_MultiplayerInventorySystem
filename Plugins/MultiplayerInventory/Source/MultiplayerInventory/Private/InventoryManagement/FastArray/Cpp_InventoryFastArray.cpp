@@ -22,7 +22,7 @@ void FInventoryFastArray::PostReplicatedAdd(const TArrayView<int32> AddedIndices
 	BroadcastEntry_Internal(AddedIndices, false);
 }
 
-UCpp_InventoryItem* FInventoryFastArray::AddEntry(UCpp_AC_Inventory* ItemComponent) {
+UCpp_InventoryItem* FInventoryFastArray::AddEntry(UCpp_AC_Item* ItemComponent) {
 	return nullptr;
 }
 
