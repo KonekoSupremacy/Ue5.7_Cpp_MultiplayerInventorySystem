@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "FastArray/Cpp_InventoryFastArray.h"
 #include "Cpp_AC_Inventory.generated.h"
 
 // Forward Declarations
@@ -23,8 +24,10 @@ public:
 	// FUNCTIONS
 	//=================================================================================================================
 	UCpp_AC_Inventory();
+	virtual void GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const override;
 	
 	void ToggleInventory();
+	void AddReplicatedSubObj(UObject* SubObj);
 	
 	UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly, Category = "Inventory")
 	void TryAddingItemToInventory(UCpp_AC_Item* ItemComp);
@@ -58,6 +61,9 @@ protected:
 	TSubclassOf<UCpp_WGT_InventoryBase> InventoryWidgetClass;
 	UPROPERTY(BlueprintReadOnly)
 	TObjectPtr<UCpp_WGT_InventoryBase> InventoryWidget;
+	
+	UPROPERTY(Replicated)
+	FInventoryFastArray InventoryList;
 
 	bool bInventoryOpen = false;
 };

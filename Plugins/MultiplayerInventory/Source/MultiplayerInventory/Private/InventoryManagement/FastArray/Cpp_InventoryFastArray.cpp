@@ -23,7 +23,7 @@ void FInventoryFastArray::PostReplicatedAdd(const TArrayView<int32> AddedIndices
 	BroadcastEntry_Internal(AddedIndices, false);
 }
 
-UCpp_InventoryItem* FInventoryFastArray::AddEntry(UCpp_AC_Item* ItemComponent) {
+UCpp_InventoryItem* FInventoryFastArray::AddEntry(const UCpp_AC_Item* ItemComponent) {
 	check(OwnerComponent);
 	auto* OwningActor = OwnerComponent->GetOwner();
 	check(OwningActor->HasAuthority());
@@ -33,8 +33,9 @@ UCpp_InventoryItem* FInventoryFastArray::AddEntry(UCpp_AC_Item* ItemComponent) {
 	
 	FInventoryEntry& NewEntry = Entries.AddDefaulted_GetRef();
 	NewEntry.Item = ItemComponent->GetItemManifest().CreateNewItem(OwningActor);
-	
-	return nullptr;
+	InventoryComp->AddReplicatedSubObj(NewEntry.Item);
+	MarkItemDirty(NewEntry);
+	return NewEntry.Item;
 }
 
 UCpp_InventoryItem* FInventoryFastArray::AddEntry(UCpp_InventoryItem* Item) {

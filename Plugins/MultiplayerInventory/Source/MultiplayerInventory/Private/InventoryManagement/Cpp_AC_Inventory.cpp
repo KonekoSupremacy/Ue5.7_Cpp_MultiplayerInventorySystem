@@ -4,13 +4,21 @@
 #include "InventoryManagement/Cpp_AC_Inventory.h"
 
 #include "Blueprint/UserWidget.h"
-#include "Items/Components/Cpp_AC_Item.h"
+#include "Net/UnrealNetwork.h"
 #include "Widgets/Inventory/Base/Cpp_WGT_InventoryBase.h"
 
 
 UCpp_AC_Inventory::UCpp_AC_Inventory() {
 	PrimaryComponentTick.bCanEverTick = false;
 
+	SetIsReplicatedByDefault(true);
+	bReplicateUsingRegisteredSubObjectList = true;
+}
+
+void UCpp_AC_Inventory::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const {
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	
+	DOREPLIFETIME(ThisClass, InventoryList);
 }
 
 void UCpp_AC_Inventory::ToggleInventory() {
@@ -29,6 +37,12 @@ void UCpp_AC_Inventory::ToggleInventory() {
 			ControllerRaw->SetInputMode(InputMode);
 		}
 		ControllerRaw->SetShowMouseCursor(bInventoryOpen);
+	}
+}
+
+void UCpp_AC_Inventory::AddReplicatedSubObj(UObject* SubObj) {
+	if (IsUsingRegisteredSubObjectList() && IsReadyForReplication() && IsValid(SubObj)) {
+		AddReplicatedSubObject(SubObj);
 	}
 }
 
@@ -52,6 +66,9 @@ void UCpp_AC_Inventory::TryAddingItemToInventory(UCpp_AC_Item* ItemComp) {
 
 
 void UCpp_AC_Inventory::Server_AddNewItemToInventory_Implementation(UCpp_AC_Item* ItemComp, int16 StackCount) {
+	auto* NewItem = InventoryList.AddEntry(ItemComp);
+	check(NewItem);	
+	
 	
 }
 void UCpp_AC_Inventory::Server_AddStacksToItem_Implementation(UCpp_AC_Item* ItemComp, int16 StackCount, int16 Remaining) {

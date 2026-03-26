@@ -1,11 +1,12 @@
 ﻿#pragma once
 
 #include "CoreMinimal.h"
-#include "InventoryManagement/Cpp_AC_Inventory.h"
 #include "Net/Serialization/FastArraySerializer.h"
 
 #include "Cpp_InventoryFastArray.generated.h"
 
+// Forward Declaration
+class UCpp_AC_Item;
 class UCpp_InventoryItem;
 
 // single entry in inventory
@@ -49,7 +50,7 @@ struct FInventoryFastArray : public FFastArraySerializer {
 	void PostReplicatedAdd(const TArrayView<int32> AddedIndices, int32 FinalSize);
 	bool NetDeltaSerialize(FNetDeltaSerializeInfo& DeltaParms);
 	
-	UCpp_InventoryItem* AddEntry(UCpp_AC_Item* ItemComponent);
+	UCpp_InventoryItem* AddEntry(const UCpp_AC_Item* ItemComponent);
 	UCpp_InventoryItem* AddEntry(UCpp_InventoryItem* Item);
 	void RemoveEntry(UCpp_InventoryItem* Item);
 	
