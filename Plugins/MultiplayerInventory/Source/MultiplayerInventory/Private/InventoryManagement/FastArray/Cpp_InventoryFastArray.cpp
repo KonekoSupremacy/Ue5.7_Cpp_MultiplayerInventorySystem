@@ -2,6 +2,7 @@
 
 #include "InventoryManagement/Cpp_AC_Inventory.h"
 #include "Items/Cpp_InventoryItem.h"
+#include "Items/Components/Cpp_AC_Item.h"
 
 TArray<UCpp_InventoryItem*> FInventoryFastArray::GetAllItems() const {
 	TArray<UCpp_InventoryItem*> Results;
@@ -23,6 +24,16 @@ void FInventoryFastArray::PostReplicatedAdd(const TArrayView<int32> AddedIndices
 }
 
 UCpp_InventoryItem* FInventoryFastArray::AddEntry(UCpp_AC_Item* ItemComponent) {
+	check(OwnerComponent);
+	auto* OwningActor = OwnerComponent->GetOwner();
+	check(OwningActor->HasAuthority());
+	
+	auto* InventoryComp = Cast<UCpp_AC_Inventory>(OwnerComponent);
+	check(InventoryComp);
+	
+	FInventoryEntry& NewEntry = Entries.AddDefaulted_GetRef();
+	NewEntry.Item = ItemComponent->GetItemManifest().CreateNewItem(OwningActor);
+	
 	return nullptr;
 }
 

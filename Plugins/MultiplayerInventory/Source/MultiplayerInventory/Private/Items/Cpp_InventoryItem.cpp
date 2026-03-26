@@ -2,10 +2,16 @@
 
 
 #include "Items/Cpp_InventoryItem.h"
+
+#include "Items/Manifest/Cpp_InventoryManifest.h"
 #include "Net/UnrealNetwork.h"
 
 void UCpp_InventoryItem::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	
 	DOREPLIFETIME(ThisClass, ItemManifest);
+}
+
+void UCpp_InventoryItem::SetItemManifest(const FCpp_InventoryManifest& Manifest) {
+	ItemManifest = FInstancedStruct::Make<FCpp_InventoryManifest>(Manifest);
 }

@@ -10,7 +10,7 @@
  */
 
 USTRUCT()
-struct MULTIPLAYERINVENTORY_API FCpp_InventoryManagement {
+struct MULTIPLAYERINVENTORY_API FCpp_InventoryManifest {
 	GENERATED_BODY()
 	
 public:
