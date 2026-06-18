@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "Types/Cpp_GridTypes.h"
 
 #include "Cpp_InventoryManifest.generated.h"
@@ -19,7 +20,8 @@ public:
 	//=================================================================================================================
 	UCpp_InventoryItem* CreateNewItem(UObject* NewOuter);
 	
-	FORCEINLINE EItemCategory GetItemCategory(EItemCategory Category) const { return ItemCategory; }
+	FORCEINLINE EItemCategory GetItemCategory() const { return ItemCategory; }
+	FORCEINLINE FGameplayTag GetItemType() const { return ItemType; }
 	
 private:
 	//=================================================================================================================
@@ -27,4 +29,7 @@ private:
 	//=================================================================================================================
 	UPROPERTY(EditAnywhere, Category = "Inventory")
 	EItemCategory ItemCategory = EItemCategory::None;
+	
+	UPROPERTY(EditAnywhere, Category = "Inventory", meta = (Categories = "GameItems"))
+	FGameplayTag ItemType;
 };
