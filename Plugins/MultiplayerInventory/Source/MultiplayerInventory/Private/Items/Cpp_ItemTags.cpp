@@ -14,17 +14,17 @@ namespace GameItems {
 		namespace Masks {
 			UE_DEFINE_GAMEPLAY_TAG(Steel, "GameItems.Equipment.Masks.Steel")
 		}
-		
-		namespace Consumables {
-			namespace Potions {
-				namespace Red {
-					UE_DEFINE_GAMEPLAY_TAG(Small, "GameItems.Equipment.Consumables.Potions.Red.Small")
-					UE_DEFINE_GAMEPLAY_TAG(Large, "GameItems.Equipment.Consumables.Potions.Red.Large")
-				}
-				namespace Blue {
-					UE_DEFINE_GAMEPLAY_TAG(Small, "GameItems.Equipment.Consumables.Potions.Blue.Small")
-					UE_DEFINE_GAMEPLAY_TAG(Large, "GameItems.Equipment.Consumables.Potions.Blue.Large")
-				}
+	}
+	
+	namespace Consumables {
+		namespace Potions {
+			namespace Red {
+				UE_DEFINE_GAMEPLAY_TAG(Small, "GameItems.Consumables.Potions.Red.Small")
+				UE_DEFINE_GAMEPLAY_TAG(Large, "GameItems.Consumables.Potions.Red.Large")
+			}
+			namespace Blue {
+				UE_DEFINE_GAMEPLAY_TAG(Small, "GameItems.Consumables.Potions.Blue.Small")
+				UE_DEFINE_GAMEPLAY_TAG(Large, "GameItems.Consumables.Potions.Blue.Large")
 			}
 		}
 	}

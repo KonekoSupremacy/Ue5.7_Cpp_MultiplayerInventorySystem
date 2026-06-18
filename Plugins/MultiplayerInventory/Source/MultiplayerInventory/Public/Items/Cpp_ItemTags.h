@@ -16,17 +16,17 @@ namespace GameItems {
 		namespace Masks {
 			UE_DECLARE_GAMEPLAY_TAG_EXTERN(Steel)
 		}
-		
-		namespace Consumables {
-			namespace Potions {
-				namespace Red {
-					UE_DECLARE_GAMEPLAY_TAG_EXTERN(Small)
-					UE_DECLARE_GAMEPLAY_TAG_EXTERN(Large)
-				}
-				namespace Blue {
-					UE_DECLARE_GAMEPLAY_TAG_EXTERN(Small)
-					UE_DECLARE_GAMEPLAY_TAG_EXTERN(Large)
-				}
+	}
+	
+	namespace Consumables {
+		namespace Potions {
+			namespace Red {
+				UE_DECLARE_GAMEPLAY_TAG_EXTERN(Small)
+				UE_DECLARE_GAMEPLAY_TAG_EXTERN(Large)
+			}
+			namespace Blue {
+				UE_DECLARE_GAMEPLAY_TAG_EXTERN(Small)
+				UE_DECLARE_GAMEPLAY_TAG_EXTERN(Large)
 			}
 		}
 	}

@@ -7,6 +7,7 @@
 #include "Types/Cpp_GridTypes.h"
 #include "Cpp_WGT_InventoryGrid.generated.h"
 
+class UCpp_AC_Inventory;
 class UUniformGridPanel;
 // Forward Declarations
 class UCpp_WGT_GridSlot;
@@ -24,6 +25,9 @@ public:
 	//=================================================================================================================
 	FORCEINLINE EItemCategory GetItemCategory() const { return ItemCategory; }
 	
+	UFUNCTION()
+	void AddItem(UCpp_InventoryItem* Item);
+	
 protected:
 	//=================================================================================================================
 	// FUNCTIONS
@@ -36,6 +40,8 @@ protected:
 	//=================================================================================================================
 	// PROPERTIES & VARIABLES
 	//=================================================================================================================
+	TWeakObjectPtr<UCpp_AC_Inventory> InventoryComponent = nullptr;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Inventory")
 	EItemCategory ItemCategory;
 	
