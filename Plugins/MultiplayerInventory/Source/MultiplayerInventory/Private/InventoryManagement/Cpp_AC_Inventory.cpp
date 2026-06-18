@@ -8,7 +8,7 @@
 #include "Widgets/Inventory/Base/Cpp_WGT_InventoryBase.h"
 
 
-UCpp_AC_Inventory::UCpp_AC_Inventory() {
+UCpp_AC_Inventory::UCpp_AC_Inventory() : InventoryList(this) {
 	PrimaryComponentTick.bCanEverTick = false;
 
 	SetIsReplicatedByDefault(true);

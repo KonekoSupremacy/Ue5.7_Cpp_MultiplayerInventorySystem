@@ -6,10 +6,20 @@
 #include "Components/UniformGridPanel.h"
 #include "InventoryManagement/Cpp_AC_Inventory.h"
 #include "InventoryManagement/Cpp_BFL_InventoryStatics.h"
+#include "Items/Cpp_InventoryItem.h"
+#include "Items/Manifest/Cpp_InventoryManifest.h"
 #include "Widgets/GridSlots/Cpp_WGT_GridSlot.h"
 #include "Widgets/Utils/Cpp_BFL_WidgetUtils.h"
 
 void UCpp_WGT_InventoryGrid::AddItem(UCpp_InventoryItem* Item, bool bRemoved) {
+	if (bRemoved) {
+		return;
+	}
+	if (!MatchesCategory(Item)) {
+		return;
+	}
+	
+	UE_LOG(LogTemp, Log, TEXT("Adding item To Inventory Grid %s"), *Item->GetName());
 }
 
 void UCpp_WGT_InventoryGrid::NativeOnInitialized() {
@@ -32,4 +42,8 @@ void UCpp_WGT_InventoryGrid::ConstructGrid() {
 			GridSlot->InitGridSlot(Index, GridSlotSize);
 		}
 	}
+}
+
+bool UCpp_WGT_InventoryGrid::MatchesCategory(const UCpp_InventoryItem* Item) const {
+	return Item->GetItemManifest().GetItemCategory() == GetItemCategory();
 }

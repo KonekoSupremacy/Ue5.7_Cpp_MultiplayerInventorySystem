@@ -9,7 +9,9 @@
 
 
 FSlotAvailabilityResult UCpp_WGT_SpatialInventory::DoesHaveRoomForItem(UCpp_AC_Item* ItemComp) const {
-	return FSlotAvailabilityResult();
+	FSlotAvailabilityResult Result;
+	Result.TotalAmountToFill = 1;
+	return Result;
 }
 
 void UCpp_WGT_SpatialInventory::SetActiveGrid(UCpp_WGT_InventoryGrid* Grid, const UButton* ClickedButton) {

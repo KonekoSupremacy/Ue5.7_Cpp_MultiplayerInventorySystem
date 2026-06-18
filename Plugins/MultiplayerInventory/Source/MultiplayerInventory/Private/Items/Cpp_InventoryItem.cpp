@@ -12,6 +12,10 @@ void UCpp_InventoryItem::GetLifetimeReplicatedProps(TArray<class FLifetimeProper
 	DOREPLIFETIME(ThisClass, ItemManifest);
 }
 
+bool UCpp_InventoryItem::IsSupportedForNetworking() const {
+	return true;
+}
+
 void UCpp_InventoryItem::SetItemManifest(const FCpp_InventoryManifest& Manifest) {
 	ItemManifest = FInstancedStruct::Make<FCpp_InventoryManifest>(Manifest);
 }

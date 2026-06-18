@@ -18,8 +18,12 @@ class MULTIPLAYERINVENTORY_API UCpp_InventoryItem : public UObject {
 	
 public:
 	virtual void GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const override;
+	virtual bool IsSupportedForNetworking() const override;
 	
+	FORCEINLINE const FCpp_InventoryManifest& GetItemManifest() const { return ItemManifest.Get<FCpp_InventoryManifest>(); }
+	FORCEINLINE FCpp_InventoryManifest& GetItemManifestMutable() { return ItemManifest.GetMutable<FCpp_InventoryManifest>(); }
 	void SetItemManifest(const FCpp_InventoryManifest& Manifest);
+	
 private:
 	//=================================================================================================================
 	// PROPERTIES & VARIABLES

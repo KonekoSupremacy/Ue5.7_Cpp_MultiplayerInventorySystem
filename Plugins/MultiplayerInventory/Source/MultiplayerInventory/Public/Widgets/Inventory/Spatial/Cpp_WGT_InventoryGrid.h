@@ -36,6 +36,7 @@ protected:
 	
 	void ConstructGrid();
 	
+	bool MatchesCategory(const UCpp_InventoryItem* Item) const;
 	
 	//=================================================================================================================
 	// PROPERTIES & VARIABLES
