@@ -27,11 +27,11 @@ namespace GameItems {
 				}
 			}
 		}
-		
-		namespace Craftables {
-			UE_DEFINE_GAMEPLAY_TAG(FireFernFruit, "GameItems.Equipment.Craftables.FireFernFruit")
-			UE_DEFINE_GAMEPLAY_TAG(LuminDaisy, "GameItems.Equipment.Craftables.LuminDaisy")
-			UE_DEFINE_GAMEPLAY_TAG(ScorchedPetalBlossom, "GameItems.Equipment.Craftables.ScorchedPetalBlossom")
-		}
+	}
+	
+	namespace Craftables {
+		UE_DEFINE_GAMEPLAY_TAG(FireFernFruit, "GameItems.Craftables.FireFernFruit")
+		UE_DEFINE_GAMEPLAY_TAG(LuminDaisy, "GameItems.Craftables.LuminDaisy")
+		UE_DEFINE_GAMEPLAY_TAG(ScorchedPetalBlossom, "GameItems.Craftables.ScorchedPetalBlossom")
 	}
 }

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include  "NativeGameplayTags.h"
 
@@ -29,11 +29,11 @@ namespace GameItems {
 				}
 			}
 		}
-		
-		namespace Craftables {
-			UE_DECLARE_GAMEPLAY_TAG_EXTERN(FireFernFruit)
-			UE_DECLARE_GAMEPLAY_TAG_EXTERN(LuminDaisy)
-			UE_DECLARE_GAMEPLAY_TAG_EXTERN(ScorchedPetalBlossom)
-		}
+	}
+	
+	namespace Craftables {
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(FireFernFruit)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(LuminDaisy)
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(ScorchedPetalBlossom)
 	}
 }
