@@ -26,7 +26,7 @@ public:
 	FORCEINLINE EItemCategory GetItemCategory() const { return ItemCategory; }
 	
 	UFUNCTION()
-	void AddItem(UCpp_InventoryItem* Item);
+	void AddItem(UCpp_InventoryItem* Item, bool bRemoved);
 	
 protected:
 	//=================================================================================================================

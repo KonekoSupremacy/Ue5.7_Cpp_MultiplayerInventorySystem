@@ -9,7 +9,7 @@
 #include "Widgets/GridSlots/Cpp_WGT_GridSlot.h"
 #include "Widgets/Utils/Cpp_BFL_WidgetUtils.h"
 
-void UCpp_WGT_InventoryGrid::AddItem(UCpp_InventoryItem* Item) {
+void UCpp_WGT_InventoryGrid::AddItem(UCpp_InventoryItem* Item, bool bRemoved) {
 }
 
 void UCpp_WGT_InventoryGrid::NativeOnInitialized() {
@@ -18,7 +18,7 @@ void UCpp_WGT_InventoryGrid::NativeOnInitialized() {
 	ConstructGrid();
 	
 	InventoryComponent = UCpp_BFL_InventoryStatics::GetInventoryComponent(GetOwningPlayer());
-	//InventoryComponent->OnItemUpdated
+	InventoryComponent->OnItemUpdated.AddDynamic(this, &ThisClass::AddItem);
 }
 
 void UCpp_WGT_InventoryGrid::ConstructGrid() {

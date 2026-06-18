@@ -69,7 +69,10 @@ void UCpp_AC_Inventory::Server_AddNewItemToInventory_Implementation(UCpp_AC_Item
 	auto* NewItem = InventoryList.AddEntry(ItemComp);
 	check(NewItem);	
 	
-	
+	const auto NetMode = GetOwner()->GetNetMode();
+	if (NetMode == NM_ListenServer || NetMode == NM_Standalone) {
+		OnItemUpdated.Broadcast(NewItem, false);
+	}
 }
 void UCpp_AC_Inventory::Server_AddStacksToItem_Implementation(UCpp_AC_Item* ItemComp, int16 StackCount, int16 Remaining) {
 	
