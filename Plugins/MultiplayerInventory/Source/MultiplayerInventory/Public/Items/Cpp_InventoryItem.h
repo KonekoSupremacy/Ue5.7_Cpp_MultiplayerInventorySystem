@@ -8,7 +8,7 @@
 #include "Cpp_InventoryItem.generated.h"
 
 // Forward Declarations
-struct FCpp_InventoryManifest;
+struct FCpp_ItemManifest;
 
 /**
  * 
@@ -21,9 +21,9 @@ public:
 	virtual void GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual bool IsSupportedForNetworking() const override;
 	
-	FORCEINLINE const FCpp_InventoryManifest& GetItemManifest() const { return ItemManifest.Get<FCpp_InventoryManifest>(); }
-	FORCEINLINE FCpp_InventoryManifest& GetItemManifestMutable() { return ItemManifest.GetMutable<FCpp_InventoryManifest>(); }
-	void SetItemManifest(const FCpp_InventoryManifest& Manifest);
+	FORCEINLINE const FCpp_ItemManifest& GetItemManifest() const { return ItemManifest.Get<FCpp_ItemManifest>(); }
+	FORCEINLINE FCpp_ItemManifest& GetItemManifestMutable() { return ItemManifest.GetMutable<FCpp_ItemManifest>(); }
+	void SetItemManifest(const FCpp_ItemManifest& Manifest);
 	
 private:
 	//=================================================================================================================

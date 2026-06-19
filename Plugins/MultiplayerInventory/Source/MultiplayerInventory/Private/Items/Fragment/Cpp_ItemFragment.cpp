@@ -2,14 +2,3 @@
 
 
 #include "Items/Fragment/Cpp_ItemFragment.h"
-
-FItemFragment::FItemFragment() {
-}
-
-FGameplayTag FItemFragment::GetFragmentTag() const {
-	return FragmentTag;
-}
-
-void FItemFragment::SetFragmentTag(const FGameplayTag& InTag) {
-	FragmentTag = InTag;
-}

@@ -7,7 +7,7 @@
 #include "InventoryManagement/Cpp_AC_Inventory.h"
 #include "InventoryManagement/Cpp_BFL_InventoryStatics.h"
 #include "Items/Cpp_InventoryItem.h"
-#include "Items/Manifest/Cpp_InventoryManifest.h"
+#include "Items/Manifest/Cpp_ItemManifest.h"
 #include "Widgets/GridSlots/Cpp_WGT_GridSlot.h"
 #include "Widgets/Utils/Cpp_BFL_WidgetUtils.h"
 

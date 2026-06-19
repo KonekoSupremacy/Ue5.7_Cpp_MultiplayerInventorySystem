@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "Items/Manifest/Cpp_InventoryManifest.h"
+#include "Items/Manifest/Cpp_ItemManifest.h"
 #include "Cpp_AC_Item.generated.h"
 
 
@@ -21,7 +21,7 @@ public:
 	virtual void GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const override;
 	
 	FORCEINLINE FString GetPickupMessage() const { return PickupMessage; }
-	FORCEINLINE FCpp_InventoryManifest GetItemManifest() const { return ItemManifest; }
+	FORCEINLINE FCpp_ItemManifest GetItemManifest() const { return ItemManifest; }
 	
 	
 protected:
@@ -32,5 +32,5 @@ protected:
 	FString PickupMessage = "F -> Pickup Item";
 	
 	UPROPERTY(Replicated, EditAnywhere, Category = "Inventory")
-	FCpp_InventoryManifest ItemManifest;
+	FCpp_ItemManifest ItemManifest;
 };
