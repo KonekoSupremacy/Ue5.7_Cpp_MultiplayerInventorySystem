@@ -6,4 +6,5 @@
 
 namespace Fragment {
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Grid) 
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Image) 
 }

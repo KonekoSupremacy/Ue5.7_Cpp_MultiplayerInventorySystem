@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Cpp_FragmentTags.h"
 #include "GameplayTagContainer.h"
 #include "Cpp_ItemFragment.generated.h"
 
@@ -31,14 +32,28 @@ USTRUCT(BlueprintType)
 struct FGridItemFragment : public FItemFragment {
 	GENERATED_BODY()
 
+	FGridItemFragment() { SetFragmentTag(Fragment::Grid); }
 	FORCEINLINE FIntPoint GetGridSize() const { return GridSize; }
-	void SetGridSize(const FIntPoint& InGridSize) { GridSize = InGridSize; }
 	FORCEINLINE float GetGridPadding() const { return GridPadding; }
-	void SetGridPadding(float InGridPadding) { GridPadding = InGridPadding; }
 	
 private:
 	UPROPERTY(EditAnywhere, Category = "Inventory")
 	FIntPoint GridSize{1, 1};
 	UPROPERTY(EditAnywhere, Category = "Inventory")
 	float GridPadding = 0.f;
+};
+
+USTRUCT(BlueprintType)
+struct FImageItemFragment : public FItemFragment {
+	GENERATED_BODY()
+
+	FImageItemFragment() { SetFragmentTag(Fragment::Image); }
+	FORCEINLINE UTexture2D* GetIcon() const { return Icon; }
+	FORCEINLINE FVector2D GetDimensions() const { return Dimensions; }
+	
+private:
+	UPROPERTY(EditAnywhere, Category = "Inventory")
+	TObjectPtr<UTexture2D> Icon = nullptr;
+	UPROPERTY(EditAnywhere, Category = "Inventory")
+	FVector2D Dimensions{44.f, 44.f};
 };
