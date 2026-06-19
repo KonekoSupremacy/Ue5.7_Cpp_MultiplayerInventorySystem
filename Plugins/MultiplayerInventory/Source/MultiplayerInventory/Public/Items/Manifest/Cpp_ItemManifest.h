@@ -2,7 +2,6 @@
 
 #include "CoreMinimal.h"
 #include "GameplayTagContainer.h"
-#include "Items/Fragment/Cpp_ItemFragment.h"
 #include "StructUtils/InstancedStruct.h"
 #include "Types/Cpp_GridTypes.h"
 
@@ -11,6 +10,9 @@
 /**
  * contains all requried data for creating new inv item
  */
+
+// Forward Declarations
+struct FItemFragment;
 
 USTRUCT()
 struct MULTIPLAYERINVENTORY_API FCpp_ItemManifest {

@@ -22,7 +22,7 @@ struct FItemFragment {
 	FORCEINLINE void SetFragmentTag(const FGameplayTag& InTag) { FragmentTag = InTag; }
 	
 private:
-	UPROPERTY(EditAnywhere, Category = "Inventory")
+	UPROPERTY(EditAnywhere, Category = "Inventory", meta = (Categories = "Fragment"))
 	FGameplayTag FragmentTag = FGameplayTag::EmptyTag;
 };
 
