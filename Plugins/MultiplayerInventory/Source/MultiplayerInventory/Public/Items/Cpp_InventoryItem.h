@@ -6,6 +6,7 @@
 #include "StructUtils/InstancedStruct.h"
 #include "UObject/Object.h"
 #include "Cpp_InventoryItem.generated.h"
+
 // Forward Declarations
 struct FCpp_InventoryManifest;
 
