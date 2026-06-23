@@ -4,8 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "Types/Cpp_GridTypes.h"
 #include "Cpp_BFL_InventoryStatics.generated.h"
 
+class UCpp_AC_Item;
 class UCpp_AC_Inventory;
 /**
  * 
@@ -20,4 +22,6 @@ public:
 	//=================================================================================================================
 	UFUNCTION(BlueprintPure, Category = "Inventory")
 	static UCpp_AC_Inventory* GetInventoryComponent(const APlayerController* PlayerController);
+	
+	static EItemCategory GetItemCategoryFromItemComp(const UCpp_AC_Item* ItemComp);
 };

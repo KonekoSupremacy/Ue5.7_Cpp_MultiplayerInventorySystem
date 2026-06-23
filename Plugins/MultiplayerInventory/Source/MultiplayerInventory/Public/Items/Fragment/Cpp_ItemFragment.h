@@ -28,7 +28,7 @@ private:
 };
 
 
-USTRUCT(BlueprintType)
+USTRUCT(BlueprintType, DisplayName = "Grid Fragment")
 struct FGridItemFragment : public FItemFragment {
 	GENERATED_BODY()
 
@@ -43,11 +43,11 @@ private:
 	float GridPadding = 0.f;
 };
 
-USTRUCT(BlueprintType)
-struct FImageItemFragment : public FItemFragment {
+USTRUCT(BlueprintType, DisplayName = "Icon Fragment")
+struct FIconItemFragment : public FItemFragment {
 	GENERATED_BODY()
 
-	FImageItemFragment() { SetFragmentTag(Fragment::Image); }
+	FIconItemFragment() { SetFragmentTag(Fragment::Image); }
 	FORCEINLINE UTexture2D* GetIcon() const { return Icon; }
 	FORCEINLINE FVector2D GetDimensions() const { return Dimensions; }
 	

@@ -7,6 +7,7 @@
 #include "Types/Cpp_GridTypes.h"
 #include "Cpp_WGT_InventoryGrid.generated.h"
 
+class UCpp_AC_Item;
 class UCpp_AC_Inventory;
 class UUniformGridPanel;
 // Forward Declarations
@@ -24,6 +25,7 @@ public:
 	// FUNCTIONS
 	//=================================================================================================================
 	FORCEINLINE EItemCategory GetItemCategory() const { return ItemCategory; }
+	FSlotAvailabilityResult HasRoomForItem(const UCpp_AC_Item* ItemComp);
 	
 	UFUNCTION()
 	void AddItem(UCpp_InventoryItem* Item, bool bRemoved);

@@ -11,6 +11,12 @@
 #include "Widgets/GridSlots/Cpp_WGT_GridSlot.h"
 #include "Widgets/Utils/Cpp_BFL_WidgetUtils.h"
 
+FSlotAvailabilityResult UCpp_WGT_InventoryGrid::HasRoomForItem(const UCpp_AC_Item* ItemComp) {
+	FSlotAvailabilityResult Result;
+	Result.TotalAmountToFill = 1;
+	return Result;
+}
+
 void UCpp_WGT_InventoryGrid::AddItem(UCpp_InventoryItem* Item, bool bRemoved) {
 	if (bRemoved) {
 		return;
