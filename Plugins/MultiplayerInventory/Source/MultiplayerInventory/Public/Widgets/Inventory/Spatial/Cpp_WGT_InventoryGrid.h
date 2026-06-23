@@ -44,6 +44,8 @@ protected:
 	FSlotAvailabilityResult HasRoomForItem(const UCpp_InventoryItem* Item);
 	FSlotAvailabilityResult HasRoomForItem(const FCpp_ItemManifest& Item);
 	
+	void AddItemToIndices(const FSlotAvailabilityResult& Result, UCpp_InventoryItem* Item);
+	
 	//=================================================================================================================
 	// PROPERTIES & VARIABLES
 	//=================================================================================================================

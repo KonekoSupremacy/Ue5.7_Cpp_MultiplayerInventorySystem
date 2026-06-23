@@ -23,8 +23,9 @@ void UCpp_WGT_InventoryGrid::AddItem(UCpp_InventoryItem* Item, bool bRemoved) {
 	if (!MatchesCategory(Item)) {
 		return; 
 	}
-	
-	FSlotAvailabilityResult Result = HasRoomForItem(Item);
+
+	const FSlotAvailabilityResult Result = HasRoomForItem(Item);
+	AddItemToIndices(Result, Item);
 }
 
 void UCpp_WGT_InventoryGrid::NativeOnInitialized() {
@@ -59,5 +60,14 @@ FSlotAvailabilityResult UCpp_WGT_InventoryGrid::HasRoomForItem(const UCpp_Invent
 FSlotAvailabilityResult UCpp_WGT_InventoryGrid::HasRoomForItem(const FCpp_ItemManifest& Item) {
 	FSlotAvailabilityResult Result;
 	Result.TotalAmountToFill = 1;
+	
+	FSlotAvailability SlotAvailability;
+	SlotAvailability.AmountToFill = 1;
+	SlotAvailability.Index = 0;
+	
+	Result.AvailableSlots.Emplace(SlotAvailability);
 	return Result;
+}
+
+void UCpp_WGT_InventoryGrid::AddItemToIndices(const FSlotAvailabilityResult& Result, UCpp_InventoryItem* Item) {
 }
