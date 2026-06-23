@@ -7,14 +7,13 @@
 #include "InventoryManagement/Cpp_AC_Inventory.h"
 #include "InventoryManagement/Cpp_BFL_InventoryStatics.h"
 #include "Items/Cpp_InventoryItem.h"
+#include "Items/Components/Cpp_AC_Item.h"
 #include "Items/Manifest/Cpp_ItemManifest.h"
 #include "Widgets/GridSlots/Cpp_WGT_GridSlot.h"
 #include "Widgets/Utils/Cpp_BFL_WidgetUtils.h"
 
 FSlotAvailabilityResult UCpp_WGT_InventoryGrid::HasRoomForItem(const UCpp_AC_Item* ItemComp) {
-	FSlotAvailabilityResult Result;
-	Result.TotalAmountToFill = 1;
-	return Result;
+	return HasRoomForItem(ItemComp->GetItemManifest());
 }
 
 void UCpp_WGT_InventoryGrid::AddItem(UCpp_InventoryItem* Item, bool bRemoved) {
@@ -22,10 +21,10 @@ void UCpp_WGT_InventoryGrid::AddItem(UCpp_InventoryItem* Item, bool bRemoved) {
 		return;
 	}
 	if (!MatchesCategory(Item)) {
-		return;
+		return; 
 	}
 	
-	UE_LOG(LogTemp, Log, TEXT("Adding item To Inventory Grid %s"), *Item->GetName());
+	FSlotAvailabilityResult Result = HasRoomForItem(Item);
 }
 
 void UCpp_WGT_InventoryGrid::NativeOnInitialized() {
@@ -52,4 +51,13 @@ void UCpp_WGT_InventoryGrid::ConstructGrid() {
 
 bool UCpp_WGT_InventoryGrid::MatchesCategory(const UCpp_InventoryItem* Item) const {
 	return Item->GetItemManifest().GetItemCategory() == GetItemCategory();
+}
+
+FSlotAvailabilityResult UCpp_WGT_InventoryGrid::HasRoomForItem(const UCpp_InventoryItem* Item) {
+	return HasRoomForItem(Item->GetItemManifest());
+}
+FSlotAvailabilityResult UCpp_WGT_InventoryGrid::HasRoomForItem(const FCpp_ItemManifest& Item) {
+	FSlotAvailabilityResult Result;
+	Result.TotalAmountToFill = 1;
+	return Result;
 }

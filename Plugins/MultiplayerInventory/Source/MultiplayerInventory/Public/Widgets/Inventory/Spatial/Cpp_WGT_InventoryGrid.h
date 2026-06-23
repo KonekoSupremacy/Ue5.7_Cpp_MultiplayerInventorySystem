@@ -7,10 +7,11 @@
 #include "Types/Cpp_GridTypes.h"
 #include "Cpp_WGT_InventoryGrid.generated.h"
 
+// Forward Declarations
+struct FCpp_ItemManifest;
 class UCpp_AC_Item;
 class UCpp_AC_Inventory;
 class UUniformGridPanel;
-// Forward Declarations
 class UCpp_WGT_GridSlot;
 
 /**
@@ -39,6 +40,9 @@ protected:
 	void ConstructGrid();
 	
 	bool MatchesCategory(const UCpp_InventoryItem* Item) const;
+	
+	FSlotAvailabilityResult HasRoomForItem(const UCpp_InventoryItem* Item);
+	FSlotAvailabilityResult HasRoomForItem(const FCpp_ItemManifest& Item);
 	
 	//=================================================================================================================
 	// PROPERTIES & VARIABLES
