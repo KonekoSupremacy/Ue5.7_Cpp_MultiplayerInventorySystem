@@ -27,6 +27,9 @@ public:
 	FORCEINLINE EItemCategory GetItemCategory() const { return ItemCategory; }
 	FORCEINLINE FGameplayTag GetItemType() const { return ItemType; }
 	
+	template<typename T> requires std::derived_from<T, FItemFragment>
+	const T* GetFragmentOfTypeWithTag(const FGameplayTag& FragmentTag);
+	
 private:
 	//=================================================================================================================
 	// PROPERTIES & VARIABLES
@@ -40,3 +43,16 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Inventory", meta = (Categories = "GameItems"))
 	FGameplayTag ItemType;
 };
+
+template<typename T> requires std::derived_from<T, FItemFragment>
+const T* FCpp_ItemManifest::GetFragmentOfTypeWithTag(const FGameplayTag& FragmentTag) {
+	for (const TInstancedStruct<FItemFragment>& Fragment : Fragments) {
+		if (const T* Frag = Fragment.GetPtr<T>()) {
+			if (Frag->GetFragmentTag().MatchesTagExact(FragmentTag)) {
+				return Frag;
+			}
+		}
+		
+	}
+	return nullptr;
+}

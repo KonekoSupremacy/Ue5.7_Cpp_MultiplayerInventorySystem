@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Manifest/Cpp_ItemManifest.h"
 #include "StructUtils/InstancedStruct.h"
 #include "UObject/Object.h"
 #include "Cpp_InventoryItem.generated.h"
@@ -32,3 +33,12 @@ private:
 	UPROPERTY(VisibleAnywhere, Replicated, meta = (BaseStruct ="/Script/Inventory.Cpp_InventoryManifest"), Category = "Inventory")
 	FInstancedStruct ItemManifest;
 };
+
+template <typename FragmentType>
+const FragmentType* GetFragment(const UCpp_InventoryItem* Item, const FGameplayTag& Tag) {
+	if (!IsValid(Item)) {
+		return nullptr;
+	}
+	const FCpp_ItemManifest& Manifest = Item->GetItemManifest();
+	return Manifest.GetFragmentOfTypeWithTag<FragmentType>(Tag);
+}
