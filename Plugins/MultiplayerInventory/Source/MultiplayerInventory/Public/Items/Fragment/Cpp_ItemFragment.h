@@ -23,7 +23,7 @@ struct FItemFragment {
 	FORCEINLINE void SetFragmentTag(const FGameplayTag& InTag) { FragmentTag = InTag; }
 	
 private:
-	UPROPERTY(EditAnywhere, Category = "Inventory", meta = (Categories = "Fragment"))
+	UPROPERTY(VisibleAnywhere, Category = "Inventory", meta = (Categories = "Fragment"))
 	FGameplayTag FragmentTag = FGameplayTag::EmptyTag;
 };
 
@@ -47,7 +47,7 @@ USTRUCT(BlueprintType, DisplayName = "Icon Fragment")
 struct FIconItemFragment : public FItemFragment {
 	GENERATED_BODY()
 
-	FIconItemFragment() { SetFragmentTag(Fragment::Image); }
+	FIconItemFragment() { SetFragmentTag(Fragment::Icon); }
 	FORCEINLINE UTexture2D* GetIcon() const { return Icon; }
 	FORCEINLINE FVector2D GetDimensions() const { return Dimensions; }
 	

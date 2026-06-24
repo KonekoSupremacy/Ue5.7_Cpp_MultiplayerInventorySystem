@@ -8,6 +8,7 @@
 #include "InventoryManagement/Cpp_BFL_InventoryStatics.h"
 #include "Items/Cpp_InventoryItem.h"
 #include "Items/Components/Cpp_AC_Item.h"
+#include "Items/Fragment/Cpp_ItemFragment.h"
 #include "Items/Manifest/Cpp_ItemManifest.h"
 #include "Widgets/GridSlots/Cpp_WGT_GridSlot.h"
 #include "Widgets/Utils/Cpp_BFL_WidgetUtils.h"
@@ -70,4 +71,11 @@ FSlotAvailabilityResult UCpp_WGT_InventoryGrid::HasRoomForItem(const FCpp_ItemMa
 }
 
 void UCpp_WGT_InventoryGrid::AddItemToIndices(const FSlotAvailabilityResult& Result, UCpp_InventoryItem* Item) {
+	const FGridItemFragment* GridFrag = GetFragment<FGridItemFragment>(Item, Fragment::Grid);
+	const FIconItemFragment* IconFrag = GetFragment<FIconItemFragment>(Item, Fragment::Icon);
+	if (!GridFrag || !IconFrag) {
+		return;
+	}
+	
+	
 }

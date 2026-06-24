@@ -28,7 +28,7 @@ public:
 	FORCEINLINE FGameplayTag GetItemType() const { return ItemType; }
 	
 	template<typename T> requires std::derived_from<T, FItemFragment>
-	const T* GetFragmentOfTypeWithTag(const FGameplayTag& FragmentTag);
+	const T* GetFragmentOfTypeWithTag(const FGameplayTag& FragmentTag) const;
 	
 private:
 	//=================================================================================================================
@@ -45,7 +45,7 @@ private:
 };
 
 template<typename T> requires std::derived_from<T, FItemFragment>
-const T* FCpp_ItemManifest::GetFragmentOfTypeWithTag(const FGameplayTag& FragmentTag) {
+const T* FCpp_ItemManifest::GetFragmentOfTypeWithTag(const FGameplayTag& FragmentTag) const {
 	for (const TInstancedStruct<FItemFragment>& Fragment : Fragments) {
 		if (const T* Frag = Fragment.GetPtr<T>()) {
 			if (Frag->GetFragmentTag().MatchesTagExact(FragmentTag)) {
